@@ -1,0 +1,9 @@
+<div class="container">
+  <h2 class="text-center">新增文章</h2>
+  <div class="form-group">
+    <%= simple_form_for [@group, @post] do |f| %>
+      <%= f.input :content, input_html: { class: "form-control"} %>
+      <%= f.submit 'submit', disable_with: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
