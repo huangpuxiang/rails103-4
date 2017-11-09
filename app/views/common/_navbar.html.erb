@@ -13,6 +13,9 @@
             hi!, <%= current_user.email %>
           <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><%= link_to("My group", account_groups_path) %></li>
+            <li><%= link_to("My post", account_posts_path) %></li>
+            <li class="divider"></li>
             <li><%= link_to("退出", destroy_user_session_path, method: :delete) %></li>
           </li>
         </div>
