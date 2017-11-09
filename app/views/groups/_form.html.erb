@@ -1,24 +1,7 @@
-<%= form_for @group do |f| %>
-
-  <% if @group.errors.any? %>
-      <ul>
-      <% @group.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-  <% end %>
-
   <div class="form-group">
-    <div class="form-group">
-      <label>标题</label>
-      <%= f.text_field :title, class: "form-control" %>
-    </div>
-    <div class="form-group">
-      <label>叙述</label>
-      <%= f.text_area :description, class: "form-control" %>
-    </div>
-
-    <%= f.submit "submit", disable_with: "submiting...", class: "btn btn-primary" %>
+    <%= simple_form_for @group do |f| %>
+      <%= f.input :title, input_html: { class: "form-control" } %>
+      <%= f.input :description, input_html: { class: "form-control" } %>
+      <%= f.submit "submit", disable_with: "submiting...", class: "btn btn-primary" %>
+    <% end %>
   </div>
-
-<% end %>
