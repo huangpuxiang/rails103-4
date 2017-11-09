@@ -29,6 +29,7 @@ class GroupsController < ApplicationController
   def create
     @group = Group.new(group_params)
     @group.user = current_user
+    current_user.join!(@group)
     if @group.save
       redirect_to groups_path
     else
@@ -39,6 +40,26 @@ class GroupsController < ApplicationController
   def destroy
     @group.destroy
     redirect_to groups_path, alert: "删除成功！"
+  end
+
+  def join
+    @group = Group.find(params[:id])
+    if !current_user.is_member_of?(@group)
+      current_user.join!(@group)
+    else
+      flash[:warning] = "你已经是本讨论组成员"
+    end
+    redirect_to group_path(@group)
+  end
+
+  def quit
+    @group = Group.find(params[:id])
+    if current_user.is_member_of?(@group)
+      current_user.quit!(@group)
+    else
+      flash[:alert] = "你本来就不是讨论组成员，如何退出？"
+    end
+    redirect_to group_path(@group)
   end
 
   private

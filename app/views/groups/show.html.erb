@@ -1,12 +1,20 @@
 <div class="container-fluid">
   <div class="group">
+    <% if current_user.is_member_of?(@group) %>
+      <%= link_to("退出群组", quit_group_path(@group), method: :post, class: "btn btn-default pull-right") %>
+      <span class="label label-success pull-right">群组成员</span>
+    <% else %>
+      <%= link_to("加入群组", join_group_path(@group), method: :post, class: "btn btn-default pull-right") %>
+      <span class="label label-warning pull-right">非群组成员</span>
+    <% end %>
+
     <%= link_to("Write a post", new_group_post_path(@group), class: "btn btn-default pull-right") %>
 
     <% if current_user && current_user == @group.user %>
       <%= link_to("Edit", edit_group_path(@group), class: "btn btn-primary pull-right") %>
     <% end %>
-
   </div>
+
   <h2><%= @group.title %></h2>
   <p><%= @group.description %></p>
 
